@@ -9,7 +9,7 @@ const _ = require('lodash');
 const options = {};
 const flag = fs.readFileSync('./flag', 'utf-8').trim();
 const docHtml = fs.readFileSync('./src/index.html', 'utf-8');
-
+app.disable('x-powered-by');
 app.use((req, res, next) => {
     res.setHeader('Set-Cookie', `SameSite=Strict`);
     next();
