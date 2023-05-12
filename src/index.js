@@ -5,17 +5,15 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const _ = require('lodash');
-const csurf = require('csurf');
 
 const options = {};
 const flag = fs.readFileSync('./flag', 'utf-8').trim();
 const docHtml = fs.readFileSync('./src/index.html', 'utf-8');
 app.disable('x-powered-by');
-app.use(csurf());
-app.use(function (req, res, next) {
-    res.locals.csrftoken = req.session._csrf;
+app.use((req, res, next) => {
+    res.setHeader('Set-Cookie', `SameSite=Strict`);
     next();
-});
+  });
 
 app.use(bodyParser.json());
 
